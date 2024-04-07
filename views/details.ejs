@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<%- include('./partials/head.ejs') %>
+
+<body>
+
+<h1><%= Auction.item %></h1>
+<h3><%= Auction.price %></h3>
+
+<a class="delete" data-doc="<%= Auction._id">delete</a>
+    
+<%- include('./partials/nav.ejs') %>
+
+    <script>
+
+        const trash = document.querySelector(a.delete);
+
+        trash.addEventListener('click', (e) => {
+            const endpoint = `/auctions/${trash.dataset.doc}`;
+
+            fetch(endpoint, {
+                methob: 'DELETE'
+            })
+            .then((response) => response.json())
+            .then((data) => window.location.href = data.redirect)
+            .catch((err) => console.log(err));
+        })
+
+    </script>
+
+</body>
+</html>
